@@ -23,12 +23,12 @@ export default function RegisterScreen() {
         }
     
         let token = await Notifications.getExpoPushTokenAsync()
-        console.log(token)
         axios.post('https://notificationsserver.herokuapp.com/api/send-code', {
             code: code,
             pushToken: token
         })
         .then(async res=> {
+            console.log('send-code res',res.data)
             try {
                 await AsyncStorage.removeItem('WorkRulesId')
                 await AsyncStorage.setItem('WorkRulesId', res.data);

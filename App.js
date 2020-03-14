@@ -34,7 +34,7 @@ export default function App() {
   useEffect(() => {
     getResToday()
     .catch(err => console.log(err))
-  }, [openHr])
+  }, [openHr, closeHr])
 
   let getResToday = async () => {
     console.log(openHr, closeHr, time)
@@ -44,7 +44,6 @@ export default function App() {
         await AsyncStorage.removeItem('resToday')
       }
     }
-    
 
     let newresToday = await AsyncStorage.getItem('resToday')
     setResTdoay(newresToday)
@@ -53,8 +52,8 @@ export default function App() {
   let getStoredData = async () => {
     const value = await AsyncStorage.getItem('WorkRulesId');
     setWorkerId(value)
-
-    axios.post('https://notificationsserver.herokuapp.com/api/user-data', {
+    //s://notificationsserver.herokuapp.com
+    axios.post('http://198.162.0.105:3001/api/user-data', {
         userId: value
     })
     .then(res=> {
@@ -101,7 +100,7 @@ export default function App() {
       <View style={styles.container}>
           {content}
       </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
