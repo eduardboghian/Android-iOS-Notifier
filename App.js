@@ -23,8 +23,8 @@ export default function App() {
 
     axios.get('https://notificationsserver.herokuapp.com/api/open-hours')
     .then(res => {
-        setOpenHr( parseFloat(res.data[0]) )
-        setCloseHr( parseFloat(res.data[1]) )
+        setOpenHr( res.data[0] )
+        setCloseHr( res.data[1] )
     })
     .catch(err => console.log(err))
 
@@ -40,6 +40,7 @@ export default function App() {
     console.log(openHr, closeHr, time)
     if( openHr!==0 && closeHr!==0 ){ 
       if(time < openHr || time > closeHr) {
+        console.log('removed...')
         await AsyncStorage.removeItem('resToday')
       }
     }
@@ -73,17 +74,23 @@ export default function App() {
   //removeStoredData()
 
   
-  let time = new Date().getHours()+ parseInt(new Date().getMinutes())/100
+  let time = new Date().getHours()+ parseInt(new Date().getMinutes())/100 
   let content
   if(workerId) {
-      console.log(openHr, closeHr)
+      content = <HomeScreen fName={userData.firstName} lName={userData.lastName} address={userData.address} email={userData.email} />
+      console.log(openHr, closeHr, resToday)
       if(time > openHr && time < closeHr) {
+          console.log('test')
           if(resToday !== 'yes'){
             content = <HomeScreen fName={userData.firstName} lName={userData.lastName} address={userData.address} email={userData.email} />
+            console.log('test2')
+            
           }else {
+            console.log('test3')
             content = <ComeBackScreen />
           }
       }else {
+          console.log('test4')
           content = <ComeBackScreen />
       }
   }else {
