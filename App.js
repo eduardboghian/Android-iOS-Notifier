@@ -53,7 +53,7 @@ export default function App() {
     const value = await AsyncStorage.getItem('WorkRulesId');
     setWorkerId(value)
     //s://notificationsserver.herokuapp.com
-    axios.post('http://198.162.0.105:3001/api/user-data', {
+    axios.post('https://notificationsserver.herokuapp.com/api/user-data', {
         userId: value
     })
     .then(res=> {
