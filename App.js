@@ -38,9 +38,8 @@ export default function App() {
   }, [openHr, closeHr])
 
   let getResToday = async () => {
-    console.log(openHr, closeHr, time)
+    console.log(openHr, closeHr)
     if( openHr!==0 && closeHr!==0 ){ 
-      await AsyncStorage.removeItem('resToday')
       if(time < openHr || time > closeHr) {
         console.log('removed...')
         await AsyncStorage.removeItem('resToday')
@@ -49,6 +48,7 @@ export default function App() {
 
     let newresToday = await AsyncStorage.getItem('resToday')
     setResTdoay(newresToday)
+    console.log("respons",newresToday)
   }
 
   let getStoredData = async () => {
