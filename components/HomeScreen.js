@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
-import Popout from './Popup'
-
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, AsyncStorage } from 'react-native';
+import Popout from './Popup';
+import { reload } from 'expo/build/Updates/Updates'
 
 export default function RegisterScreen({id, fName, address, lName, email}) {
     const [reload, setReload] = useState(1)
@@ -22,6 +22,15 @@ export default function RegisterScreen({id, fName, address, lName, email}) {
         setReload(reload+1)
     }
 
+    let removeStoredData = async ()=> {
+      try{
+        await AsyncStorage.removeItem('WorkRulesId')
+      }
+      catch(err) {
+          console.log(err)
+      }
+    }
+
     return (
         <View style={styles.container}>
             <Popout 
@@ -32,7 +41,7 @@ export default function RegisterScreen({id, fName, address, lName, email}) {
               email={email} 
               ans={ans} 
             />
-            <Text style={styles.title}>Good Morning</Text>
+            <Text style={styles.title} onPress={e => removeStoredData()}>Good Morning</Text>
             <Text style={styles.title}>{fName}</Text>
             <Text style={{  marginTop: 40, textAlign: 'center', fontSize: 10 }} >Please confirm that you are working today on the following site:</Text>
             <Text style={styles.address} >{address}</Text>

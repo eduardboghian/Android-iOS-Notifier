@@ -60,7 +60,7 @@ export default function App() {
     })
     .then(res=> {
       res.data.map(data => {
-          
+          console.log(data)
           if(data!==null) {
               setUserData({ id: data[9], firstName: data[0], lastName: data[1], address: data[3]+ "\n" +data[4]+"\n" +data[5], email: data[6] })
           }
@@ -68,12 +68,6 @@ export default function App() {
     })
     .catch(err => console.log(err))
   }
-
-  let removeStoredData = async ()=> {
-      await AsyncStorage.removeItem('WorkRulesId')
-  }
-  //removeStoredData()
-
   
   let time = new Date().getHours()+ parseInt(new Date().getMinutes())/100 
   let content
