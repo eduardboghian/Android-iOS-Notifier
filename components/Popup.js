@@ -32,12 +32,12 @@ export default function Popup({id, styleWr, Name, address, email, ans}) {
         .then(res=> {
             console.log(res.data)
             setStyle({display: 'none'})
-            reload()
+            
         })
         .catch(error => console.log(error))
 
         await AsyncStorage.setItem('resToday', 'yes')
-        
+        reload()
     }
 
     return (
