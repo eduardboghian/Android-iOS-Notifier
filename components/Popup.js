@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, AsyncStorage } fr
 import axios from 'axios'
 import { reload } from 'expo/build/Updates/Updates'
 
-export default function Popup({styleWr, Name, address, email, ans}) {
+export default function Popup({id, styleWr, Name, address, email, ans}) {
     const [style, setStyle] = useState({})
     const[popupMessage, setMsg] = useState('')
 
@@ -23,6 +23,7 @@ export default function Popup({styleWr, Name, address, email, ans}) {
         
         //https://notificationsserver.herokuapp.com
         axios.post('https://notificationsserver.herokuapp.com/api/send-email', {
+            id: id,
             response: ans,
             name: Name,
             address: address,
@@ -31,11 +32,12 @@ export default function Popup({styleWr, Name, address, email, ans}) {
         .then(res=> {
             console.log(res.data)
             setStyle({display: 'none'})
+            reload()
         })
         .catch(error => console.log(error))
 
         await AsyncStorage.setItem('resToday', 'yes')
-        reload()
+        
     }
 
     return (

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-nati
 import Popout from './Popup'
 
 
-export default function RegisterScreen({fName, address, lName, email}) {
+export default function RegisterScreen({id, fName, address, lName, email}) {
     const [reload, setReload] = useState(1)
     const [ans, setAns] = useState('')
 
@@ -25,6 +25,7 @@ export default function RegisterScreen({fName, address, lName, email}) {
     return (
         <View style={styles.container}>
             <Popout 
+            id={id}
               styleWr={styles.popup} f
               Name={fName+' '+lName} 
               address={address} 

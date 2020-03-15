@@ -8,6 +8,7 @@ import ComeBackScreen from './components/ComeBackScreen'
 export default function App() {
   const [workerId, setWorkerId] = useState('')
   const [userData, setUserData] = useState({
+      id: '',
       firstName: '',
       lastName: '',
       address: '', 
@@ -39,6 +40,7 @@ export default function App() {
   let getResToday = async () => {
     console.log(openHr, closeHr, time)
     if( openHr!==0 && closeHr!==0 ){ 
+      await AsyncStorage.removeItem('resToday')
       if(time < openHr || time > closeHr) {
         console.log('removed...')
         await AsyncStorage.removeItem('resToday')
@@ -60,7 +62,7 @@ export default function App() {
       res.data.map(data => {
           
           if(data!==null) {
-              setUserData({ firstName: data[0], lastName: data[1], address: data[3]+ "\n" +data[4]+"\n" +data[5], email: data[6] })
+              setUserData({ id: data[9], firstName: data[0], lastName: data[1], address: data[3]+ "\n" +data[4]+"\n" +data[5], email: data[6] })
           }
       })
     })
@@ -76,12 +78,12 @@ export default function App() {
   let time = new Date().getHours()+ parseInt(new Date().getMinutes())/100 
   let content
   if(workerId) {
-      content = <HomeScreen fName={userData.firstName} lName={userData.lastName} address={userData.address} email={userData.email} />
+      content = <HomeScreen id={userData.id} fName={userData.firstName} lName={userData.lastName} address={userData.address} email={userData.email} />
       console.log(openHr, closeHr, resToday)
       if(time > openHr && time < closeHr) {
           console.log('test')
           if(resToday !== 'yes'){
-            content = <HomeScreen fName={userData.firstName} lName={userData.lastName} address={userData.address} email={userData.email} />
+            content = <HomeScreen id={userData.id} fName={userData.firstName} lName={userData.lastName} address={userData.address} email={userData.email} />
             console.log('test2')
             
           }else {

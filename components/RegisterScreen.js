@@ -19,7 +19,7 @@ export default function RegisterScreen() {
     
         if (finalStatus !== 'granted') {
             alert('No notification permissions!');
-            return;
+            return
         }
     
         let token = await Notifications.getExpoPushTokenAsync()
