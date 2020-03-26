@@ -4,12 +4,8 @@
     "slug": "WorkRules",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.2",
+    "platforms": ["ios", "android", "web"],
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,14 +15,17 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "notification": {
+      "iosDisplayInForeground": true
+    },
     "ios": {
       "bundleIdentifier": "com.wokrrules.worknotifier",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.3",
       "supportsTablet": true
     },
     "android": {
       "package": "com.workrules.worknotifier",
-      "versionCode": 1
+      "versionCode": 3
     }
   }
 }

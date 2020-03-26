@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, AsyncStorage } from 'react-native';
 import Popout from './Popup';
-import { reload } from 'expo/build/Updates/Updates'
 
 export default function RegisterScreen({id, fName, address, lName, email}) {
     const [reload, setReload] = useState(1)
     const [ans, setAns] = useState('')
+
+    // useEffect(() => {
+    //   removeStoredData()
+    // }, [])
 
     function popup(answer) {
         styles.popup = {

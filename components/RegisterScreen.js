@@ -9,6 +9,7 @@ export default function RegisterScreen() {
     const [code, setCode] = useState('')
 
     async function sendCode() {
+        alert('Code Sent!')
         const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS)
         let finalStatus = status
     
@@ -23,6 +24,7 @@ export default function RegisterScreen() {
         }
     
         let token = await Notifications.getExpoPushTokenAsync()
+
         axios.post('https://notificationsserver.herokuapp.com/api/send-code', {
             code: code,
             pushToken: token
@@ -38,7 +40,7 @@ export default function RegisterScreen() {
                 alert(error)
             }    
         })
-        .catch(err=> console.log(err))
+        .catch(err=> alert(err))
     }
 
     return (

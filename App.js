@@ -5,6 +5,21 @@ import RegisterScreen from './components/RegisterScreen';
 import HomeScreen from './components/HomeScreen' 
 import ComeBackScreen from './components/ComeBackScreen'
 
+import firebase from 'firebase'
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCmCknaHb2eu1845H3bxwz2A73MVx3US1w",
+  authDomain: "workrules-7df60.firebaseapp.com",
+  databaseURL: "https://workrules-7df60.firebaseio.com",
+  projectId: "workrules-7df60",
+  storageBucket: "workrules-7df60.appspot.com",
+  messagingSenderId: "536990184282",
+  appId: "1:536990184282:web:e31fef2256404deaadb963",
+  measurementId: "G-9CEBMTGLHM"
+};
+
+firebase.initializeApp(firebaseConfig)
+
 export default function App() {
   const [workerId, setWorkerId] = useState('')
   const [userData, setUserData] = useState({
@@ -54,7 +69,6 @@ export default function App() {
   let getStoredData = async () => {
     const value = await AsyncStorage.getItem('WorkRulesId');
     setWorkerId(value)
-    //s://notificationsserver.herokuapp.com
     axios.post('https://notificationsserver.herokuapp.com/api/user-data', {
         userId: value
     })
@@ -86,7 +100,7 @@ export default function App() {
           }
       }else {
           console.log('test4')
-          content = <ComeBackScreen />
+          content = <HomeScreen id={userData.id} fName={userData.firstName} lName={userData.lastName} address={userData.address} email={userData.email} />
       }
   }else {
       content = <RegisterScreen /> 
