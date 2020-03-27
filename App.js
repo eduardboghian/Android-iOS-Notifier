@@ -100,7 +100,7 @@ export default function App() {
           }
       }else {
           console.log('test4')
-          content = <HomeScreen id={userData.id} fName={userData.firstName} lName={userData.lastName} address={userData.address} email={userData.email} />
+          content = <ComeBackScreen />
       }
   }else {
       content = <RegisterScreen /> 
